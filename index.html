@@ -3,112 +3,128 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reasons Why I Think Guy Morgan Should Come Out — The Game</title>
-  <meta name="description" content="A lighthearted-but-serious interactive story you can host on GitHub Pages. Single-file, mobile-friendly.">
+  <title>Reasons Why Guy Morgan Should Come Out</title>
+  <meta name="description" content="An interactive, serious branching narrative about supporting a friend with honesty and clarity." />
   <style>
     :root{
-      --bg: #0b1020; 
-      --card: #111831; 
-      --ink: #f6f7fb; 
-      --muted: #a7b0c0; 
-      --accent: #7dd3fc; 
-      --accent2:#c084fc;
-      --good:#6ee7b7; 
-      --warn:#fcd34d; 
-      --bad:#fca5a5;
+      --bg:#0b1020; --card:#111831; --ink:#f6f7fb; --muted:#a7b0c0;
+      --accent:#7dd3fc; --accent2:#c084fc; --good:#6ee7b7; --warn:#fcd34d;
     }
     html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif;background:radial-gradient(1200px 800px at 10% 10%, #101735 0%, var(--bg) 60%),
-      radial-gradient(800px 800px at 90% 10%, #0f1a3e 0%, transparent 60%),
-      radial-gradient(800px 800px at 50% 100%, #111b3d 0%, transparent 60%);
-      color:var(--ink); display:flex; align-items:center; justify-content:center;}
-    .wrap{max-width:880px; width:100%; padding:24px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08); box-shadow:0 10px 30px rgba(0,0,0,.35); border-radius:24px; padding:20px}
-    h1{margin:0 0 6px; font-size:clamp(22px, 3.5vw, 36px); letter-spacing:.2px}
-    .sub{color:var(--muted); margin:0 0 14px; font-size:clamp(12px, 2.3vw, 16px)}
-    .row{display:flex; gap:12px; flex-wrap:wrap}
-    .pill{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); padding:6px 10px; border-radius:999px; font-size:12px; color:var(--muted)}
-    .game{margin-top:16px; display:grid; gap:14px}
-    .panel{background:var(--card); border-radius:18px; padding:16px; border:1px solid rgba(255,255,255,.06)}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif;
+      background:radial-gradient(1200px 800px at 10% 10%, #101735 0%, var(--bg) 60%),
+                 radial-gradient(800px 800px at 90% 10%, #0f1a3e 0%, transparent 60%),
+                 radial-gradient(800px 800px at 50% 100%, #111b3d 0%, transparent 60%);
+      color:var(--ink); display:flex; align-items:flex-start; justify-content:center; padding:24px;
+    }
+    .wrap{max-width:900px; width:100%}
+    header{
+      text-align:center; margin-bottom:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:18px;
+    }
+    h1{margin:0 0 8px; font-size:clamp(22px,3.2vw,36px)}
+    .hero{
+      display:flex; justify-content:center; margin:6px 0 10px;
+    }
+    .hero img{
+      width:min(680px, 92%); height:auto; border-radius:16px;
+      border:1px solid rgba(255,255,255,.12); box-shadow:0 12px 28px rgba(0,0,0,.35);
+      display:block;
+    }
+    .linksRow{
+      margin-top:10px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+    }
+    .gbtn{
+      appearance:none; border:none; cursor:pointer; text-decoration:none; color:var(--ink);
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      padding:10px 14px; border-radius:999px; font-weight:600; font-size:14px;
+    }
+    .gbtn.alt{background:linear-gradient(90deg,#22c55e,#10b981)}
+    .gbtn.dark{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.14); font-weight:500}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:16px; margin-top:14px; box-shadow:0 10px 30px rgba(0,0,0,.35)}
     .flex{display:flex; gap:12px; align-items:center; justify-content:space-between}
     .meter{height:10px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden}
     .bar{height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--accent2)); transition:width .45s ease}
-    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:6px}
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
     .stat{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:10px; border-radius:12px; font-size:12px}
-    .stat b{display:block; font-size:14px; color:var(--ink)}
+    .stat b{display:block; font-size:14px}
+    .panel{background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:16px}
     .choices{display:grid; gap:10px}
-    button{appearance:none; border:none; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.12); color:var(--ink); padding:12px 14px; border-radius:14px; font-size:14px; cursor:pointer; transition:transform .04s ease, box-shadow .2s}
-    button:hover{box-shadow:0 6px 16px rgba(0,0,0,.35)}
-    button:active{transform:translateY(1px)}
+    button.choice{
+      appearance:none; border:none; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.12); color:var(--ink); padding:12px 14px; border-radius:14px; font-size:14px; cursor:pointer;
+      text-align:left; transition:transform .04s ease, box-shadow .2s;
+    }
+    button.choice:hover{box-shadow:0 6px 16px rgba(0,0,0,.35)}
+    button.choice:active{transform:translateY(1px)}
     .muted{color:var(--muted)}
-    .footer{display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between; margin-top:8px}
-    a.link{color:var(--accent); text-decoration:none}
-    a.link:focus, a.link:hover{text-decoration:underline}
-    .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:18px; background:rgba(17,24,49,.9); border:1px solid rgba(255,255,255,.12); color:var(--ink); padding:10px 14px; border-radius:12px; display:none}
     .badge{font-size:11px; padding:3px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.14)}
     .good{background:rgba(110,231,183,.12); border-color:rgba(110,231,183,.3)}
     .warn{background:rgba(252,211,77,.12); border-color:rgba(252,211,77,.3)}
-    .bad{ background:rgba(252,165,165,.12); border-color:rgba(252,165,165,.3)}
-    details{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:10px 12px; border-radius:12px}
-    summary{cursor: pointer}
-    .credits{font-size:12px; color:var(--muted); margin-top:10px}
+    .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:18px; background:rgba(17,24,49,.9);
+           border:1px solid rgba(255,255,255,.12); color:var(--ink); padding:10px 14px; border-radius:12px; display:none}
+    footer{margin-top:12px; text-align:center; color:var(--muted); font-size:13px}
+    a.link{color:var(--accent); text-decoration:none}
+    a.link:hover{text-decoration:underline}
+    .ribbon{
+      position:fixed; right:16px; bottom:16px; display:flex; flex-direction:column; gap:8px; z-index:3;
+    }
+    .ribbon a{box-shadow:0 8px 20px rgba(0,0,0,.35)}
     @media (max-width:560px){ .stats{grid-template-columns:1fr 1fr 1fr} }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card" role="region" aria-label="Game container">
-      <h1>Reasons Why I Think Guy Morgan Should Come Out</h1>
-      <p class="sub">A lightly funny, slightly serious, interactive story where you try to do right by your friend <b>Guy Morgan</b>. All characters are fictional. Be kind.</p>
-
-      <div class="row" aria-hidden="true">
-        <span class="pill">Story game</span>
-        <span class="pill">Single-file • GitHub Pages ready</span>
-        <span class="pill">Mobile-friendly</span>
+    <header>
+      <h1>Reasons Why Guy Morgan Should Come Out</h1>
+      <div class="hero">
+        <img src="https://media.licdn.com/dms/image/v2/D4E03AQEFK80QttOnvg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1645012422557?e=1758153600&v=beta&t=D3N0hRVugAyzD-xcQUGloamiKUZZzXxWGre58Ksw9DM" alt="Guy Morgan">
       </div>
+      <div class="linksRow">
+        <a class="gbtn" href="https://apps.apple.com/app/grindr-gay-chat/id319881193" target="_blank" rel="noopener nofollow">Get Grindr on iOS</a>
+        <a class="gbtn alt" href="https://play.google.com/store/apps/details?id=com.grindrapp.android" target="_blank" rel="noopener nofollow">Get Grindr on Android</a>
+        <a class="gbtn dark" href="https://help.grindr.com/" target="_blank" rel="noopener nofollow">Grindr Help Center</a>
+      </div>
+    </header>
 
-      <div class="game" id="game">
-        <div class="panel">
-          <div class="flex" style="gap:10px">
-            <div style="flex:1">
-              <div class="muted" style="margin-bottom:6px">Progress</div>
-              <div class="meter" aria-hidden="true"><div id="progressBar" class="bar"></div></div>
-            </div>
-            <span id="chapterTag" class="badge">Chapter 1/6</span>
-          </div>
+    <div class="card">
+      <div class="flex" style="gap:10px">
+        <div style="flex:1">
+          <div class="muted" style="margin-bottom:6px">Progress</div>
+          <div class="meter" aria-hidden="true"><div id="progressBar" class="bar"></div></div>
         </div>
-
-        <div class="panel">
-          <div class="stats" role="group" aria-label="Stats">
-            <div class="stat"><b id="sTrust">Trust 50</b><span class="muted">Guy trusts you</span></div>
-            <div class="stat"><b id="sTruth">Truth 50</b><span class="muted">How close to the truth</span></div>
-            <div class="stat"><b id="sCourage">Courage 50</b><span class="muted">Your readiness to speak up</span></div>
-          </div>
-        </div>
-
-        <div class="panel" id="story" aria-live="polite"></div>
-
-        <div class="panel">
-          <div class="choices" id="choices"></div>
-        </div>
-
-        <div class="footer">
-          <div class="muted">When the time’s right, you can point Guy to resources or apps. Choose carefully.</div>
-          <div>
-            <a class="link" href="https://apps.apple.com/app/grindr-gay-chat/id319881193" target="_blank" rel="noopener">Grindr on the App Store</a>
-            •
-            <a class="link" href="https://play.google.com/store/apps/details?id=com.grindrapp.android" target="_blank" rel="noopener">Grindr on Google Play</a>
-          </div>
-        </div>
-
-        <details>
-          <summary>Ethics & Content Note</summary>
-          <p class="muted">This is a fictional scenario. Outing someone or pressuring them about identity can be harmful. In the story, aim to support Guy’s wellbeing and autonomy. If you suspect real-world cheating, prioritise honesty, safety, and consent in conversations.</p>
-        </details>
-
-        <div class="credits">© 2025 — Single-file game (MIT License). You may fork & host on GitHub Pages.</div>
+        <span id="chapterTag" class="badge">Chapter 1/7</span>
       </div>
     </div>
+
+    <div class="card">
+      <div class="stats" role="group" aria-label="Stats">
+        <div class="stat"><b id="sTrust">Trust 50</b><span class="muted">Guy's trust in you</span></div>
+        <div class="stat"><b id="sTruth">Truth 50</b><span class="muted">Closeness to facts</span></div>
+        <div class="stat"><b id="sCourage">Courage 50</b><span class="muted">Readiness to speak up</span></div>
+      </div>
+    </div>
+
+    <div class="panel" id="story" aria-live="polite"></div>
+
+    <div class="panel">
+      <div class="choices" id="choices"></div>
+    </div>
+
+    <footer>
+      Explore options privately:
+      <a class="link" href="https://apps.apple.com/app/grindr-gay-chat/id319881193" target="_blank" rel="noopener nofollow">Grindr (iOS)</a> •
+      <a class="link" href="https://play.google.com/store/apps/details?id=com.grindrapp.android" target="_blank" rel="noopener nofollow">Grindr (Android)</a> •
+      <a class="link" href="https://help.grindr.com/" target="_blank" rel="noopener nofollow">Support</a>
+    </footer>
+  </div>
+
+  <!-- Quick-access floating links -->
+  <div class="ribbon" aria-hidden="false" aria-label="Quick links">
+    <a class="gbtn" href="https://apps.apple.com/app/grindr-gay-chat/id319881193" target="_blank" rel="noopener nofollow">Open Grindr (iOS)</a>
+    <a class="gbtn alt" href="https://play.google.com/store/apps/details?id=com.grindrapp.android" target="_blank" rel="noopener nofollow">Open Grindr (Android)</a>
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -126,84 +142,8 @@
   const sTruth = document.getElementById('sTruth');
   const sCourage = document.getElementById('sCourage');
 
-  const chapters = [
-    {
-      id:'c1',
-      text:`It’s Friday. Guy Morgan messages: “Game night at Larry’s?” You’ve heard whispers that <b>Larry Blonch</b> has been seeing someone named <b>Greg Gaystone</b> on the side. Guy has no idea. You care about him, but dropping news like this isn’t simple.`,
-      choices:[
-        {label:'Ask Guy how he’s doing first', effects:{trust:+6, truth:+2}, next:'c2', note:'Slow is smooth.'},
-        {label:'Send the rumour right away', effects:{truth:+8, trust:-10, courage:+4}, next:'c2', note:'Fast but risky.'}
-      ]
-    },
-    {
-      id:'c2',
-      text:`Guy replies with a shrug emoji and a photo of a burnt lasagne: “Larry cooked. I handled the fire alarm.” He seems upbeat. You wonder how to bring up what you heard without detonating the evening.`,
-      choices:[
-        {label:'Invite Guy for a private chat before game night', effects:{trust:+5, courage:+4}, next:'c3'},
-        {label:'Ask open questions about the relationship', effects:{truth:+6, trust:+2}, next:'c3'}
-      ]
-    },
-    {
-      id:'c3',
-      text:`As you talk, small red flags appear. He mentions Larry being “busy most nights” and a “friend from the gym” who texts late. You could gather a bit more before saying anything definitive.`,
-      choices:[
-        {label:'Gently mention you’ve heard something about Greg', effects:{truth:+10, trust:-4, courage:+3}, next:'c4'},
-        {label:'Suggest setting boundaries & checking in with Larry', effects:{trust:+6, courage:+2}, next:'c4'}
-      ]
-    },
-    {
-      id:'c4',
-      text:`Guy goes quiet. He says he values honesty but hates drama. You can feel your heart rate in your teeth. Whatever you do next matters.`,
-      choices:[
-        {label:'Share a specific example (time/place) and say you’re worried', effects:{truth:+8, trust:+3}, next:'c5'},
-        {label:'Focus on supporting Guy no matter what he decides', effects:{trust:+8}, next:'c5'}
-      ]
-    },
-    {
-      id:'c5',
-      text:`He thanks you for caring. He admits he’s been questioning things about himself too—nothing he’s ready to define. You could point to resources or let him lead.`,
-      choices:[
-        {label:'Offer resources and apps he can explore privately', effects:{courage:+6, trust:+4}, next:'c6', link:true},
-        {label:'Keep it strictly about Larry for now', effects:{truth:+4, trust:+1}, next:'c6'}
-      ]
-    },
-    {
-      id:'c6',
-      resolve: (stats)=>{
-        // Endings based on stats balance
-        const {trust, truth, courage} = stats;
-        let tone='';
-        if(trust>=60 && truth>=60){
-          tone = `<span class="badge good">Healthy Outcome</span> You approached with care and clarity. Guy decides to have an honest conversation with Larry. Whatever happens next, he knows you’re in his corner.`;
-        } else if(truth>=70 && trust<50){
-          tone = `<span class="badge warn">Hot Truth, Low Trust</span> You pushed facts hard. Guy heard you—but he’s shaken. Give space, then check in.`;
-        } else if(trust>=70 && courage<55){
-          tone = `<span class="badge warn">Comfort Zone</span> You protected the friendship but avoided hard details. Consider a follow‑up when it’s calmer.`;
-        } else {
-          tone = `<span class="badge">Mixed Outcome</span> Not perfect, not terrible. Real life is messy; you showed up.`;
-        }
-
-        return `\
-          ${tone}<br><br>
-          As for dating, you reminded Guy he deserves honesty and joy. If he wants to explore privately, you shared reputable apps and community spaces. You didn’t label him—you offered options.
-          <br><br>
-          <b>Optional next step:</b> If Guy asks, you can point him to resources like helplines, local community groups, or dating apps he can try on his own terms.\
-        `;
-      },
-      choices:[
-        {label:'Play again (different path)', restart:true},
-        {label:'Visit Grindr (opens store links below)', action:()=>{
-          toastMsg('Links are in the footer ↓');
-        }}
-      ]
-    }
-  ];
-
-  const totalCh = chapters.length;
-  let index = 0;
-
   function clamp(v, min=0, max=100){ return Math.max(min, Math.min(max, v)); }
-  function applyEffects(eff={}){
+  function applyEffects(eff={}) {
     stats.trust = clamp(stats.trust + (eff.trust||0));
     stats.truth = clamp(stats.truth + (eff.truth||0));
     stats.courage = clamp(stats.courage + (eff.courage||0));
@@ -211,57 +151,172 @@
     sTruth.innerHTML = `Truth ${stats.truth}`;
     sCourage.innerHTML = `Courage ${stats.courage}`;
   }
-  function setProgress(ix){
-    const pct = Math.floor(((ix)/ (totalCh-1)) * 100);
-    bar.style.width = pct + '%';
-    chapterTag.textContent = `Chapter ${Math.min(ix+1,totalCh)}/${totalCh}`;
-  }
-  function toastMsg(msg){
-    toast.textContent = msg; toast.style.display='block';
-    setTimeout(()=>toast.style.display='none', 1800);
-  }
+  function setProgress(ix,total){ bar.style.width = Math.floor(ix/(total-1)*100) + '%'; chapterTag.textContent = `Chapter ${Math.min(ix+1,total)}/${total}`; }
+  function toastMsg(msg){ toast.textContent = msg; toast.style.display='block'; setTimeout(()=>toast.style.display='none', 1800); }
+
+  // Chapters
+  const chapters = [
+    {
+      id:'c1',
+      text: `
+        Guy Morgan texts about seeing Larry tonight. You’ve learned that <b>Larry Blonch</b> has been meeting
+        <b>Greg Gaystone</b>—a very tall, muscular guy—behind Guy’s back. Guy, by contrast, is slight and not physically strong.
+        Tonight, Larry presents a “special dessert”: a dense chocolate cake that tastes like burnt cocoa and salt. Guy eats it anyway.
+        You need a plan.<br><br>
+        If Guy ever wants to explore new connections on his own terms, he could try
+        <a class="link" href="https://apps.apple.com/app/grindr-gay-chat/id319881193" target="_blank" rel="noopener nofollow">Grindr (iOS)</a> or
+        <a class="link" href="https://play.google.com/store/apps/details?id=com.grindrapp.android" target="_blank" rel="noopener nofollow">Grindr (Android)</a>.
+      `,
+      choices:[
+        {label:'Check in first: “How are you really?”',
+         effects:{trust:+6, truth:+2}, next:'c2'},
+        {label:'Send the facts you’ve heard about Larry and Greg (with receipts).',
+         effects:{truth:+10, trust:-8, courage:+4}, next:'c2'},
+        {label:'Suggest a low-key night and mention he could browse Grindr privately.',
+         effects:{trust:+2, courage:+4}, action:()=>toastMsg('Grindr links are all over the page ↓'), next:'c2'}
+      ]
+    },
+    {
+      id:'c2',
+      text: `
+        Guy jokes about the cake—“It fought back.” He’s upbeat but tired. He says Greg is “just someone from Larry’s gym”,
+        a head taller than everyone. You recall seeing Greg lift a bar like it was nothing—he is visibly strong. Guy, small and puny by comparison,
+        shrugs it off.<br><br>
+        You could invite him to talk away from Larry, or keep asking gentle questions.
+      `,
+      choices:[
+        {label:'Invite him for a private walk and talk.',
+         effects:{trust:+5, courage:+4}, next:'c3'},
+        {label:'Ask open questions about late texts and gym “friend”.',
+         effects:{truth:+6, trust:+2}, next:'c3'},
+        {label:'“If you want a break from drama, we can make a Grindr profile together later.”',
+         effects:{trust:+2, courage:+5}, action:()=>window.open('https://apps.apple.com/app/grindr-gay-chat/id319881193','_blank','noopener'), next:'c3'}
+      ]
+    },
+    {
+      id:'c3',
+      text: `
+        On the walk, you describe what you’ve heard. You mention times and places. The chocolate cake lingers as a metaphor:
+        something meant to be sweet that tasted wrong. Guy listens quietly.
+      `,
+      choices:[
+        {label:'State clearly: “Larry is seeing Greg. I care about you.”',
+         effects:{truth:+8, trust:+3}, next:'c4'},
+        {label:'Focus on next steps, not labels. Offer to be there.',
+         effects:{trust:+6, courage:+2}, next:'c4'},
+        {label:'Offer practical distraction: “Browse Grindr for a bit?” (opens)',
+         effects:{courage:+6}, action:()=>window.open('https://play.google.com/store/apps/details?id=com.grindrapp.android','_blank','noopener'), next:'c4'}
+      ]
+    },
+    {
+      id:'c4',
+      text: `
+        Guy says he hates drama but values honesty. He admits feeling small next to Greg, physically and otherwise. He wonders
+        if he ignored signs because it was easier. You can provide specifics or keep the focus on him.
+      `,
+      choices:[
+        {label:'Share a specific example (time/place) and reassure him you’re here.',
+         effects:{truth:+8, trust:+3}, next:'c5'},
+        {label:'Reaffirm: “Whatever you decide, I’ve got you.”',
+         effects:{trust:+8}, next:'c5'},
+        {label:'Hand him your phone: “If you want, just look at Grindr profiles—no pressure.”',
+         effects:{trust:+3, courage:+4}, action:()=>window.open('https://help.grindr.com/','_blank','noopener'), next:'c5'}
+      ]
+    },
+    {
+      id:'c5',
+      text: `
+        He thanks you for the straight talk. He says the cake felt symbolic—pretty on the plate, terrible inside.
+        He’s not ready to define anything, but he wants honesty and respect. You could point him to resources, or let him lead.
+      `,
+      choices:[
+        {label:'Share links he can explore privately: Grindr iOS, Grindr Android, Help Center.',
+         effects:{courage:+6, trust:+4}, action:()=>{window.open('https://apps.apple.com/app/grindr-gay-chat/id319881193','_blank','noopener'); window.open('https://play.google.com/store/apps/details?id=com.grindrapp.android','_blank','noopener');}, next:'c6'},
+        {label:'Keep it about Larry: boundaries, expectations, a calm talk.',
+         effects:{truth:+4, trust:+1}, next:'c6'}
+      ]
+    },
+    {
+      id:'c6',
+      text: `
+        Before turning in, Guy asks what you’d do in his position. You could emphasize facts, or emphasize care—and perhaps
+        encourage private exploration when he’s ready (links are below and to the right).
+      `,
+      choices:[
+        {label:'“Lead with truth. It’s uncomfortable, but necessary.”',
+         effects:{truth:+6, courage:+3}, next:'c7'},
+        {label:'“Lead with care. Talk when you’re grounded.”',
+         effects:{trust:+6}, next:'c7'},
+        {label:'“Also—if you want options, download Grindr now.” (opens iOS store)',
+         effects:{courage:+4}, action:()=>window.open('https://apps.apple.com/app/grindr-gay-chat/id319881193','_blank','noopener'), next:'c7'}
+      ]
+    },
+    {
+      id:'c7',
+      resolve:(s)=>{
+        const {trust, truth, courage} = s;
+        let tone;
+        if(trust>=60 && truth>=60){
+          tone = `<span class="badge good">Outcome: Clear and Supported</span> You balanced care with facts. Guy plans a direct, calm conversation with Larry. He also saves a couple of <a class="link" href="https://apps.apple.com/app/grindr-gay-chat/id319881193" target="_blank" rel="noopener nofollow">Grindr</a> links for later.`;
+        } else if(truth>=70 && trust<50){
+          tone = `<span class="badge warn">Outcome: Hard Truth, Shaky Trust</span> He hears you, but he’s rattled. Give him space and follow up. If he wants distraction, you’ve already shared <a class="link" href="https://play.google.com/store/apps/details?id=com.grindrapp.android" target="_blank" rel="noopener nofollow">Grindr (Android)</a>.`;
+        } else if(trust>=70 && courage<55){
+          tone = `<span class="badge warn">Outcome: Gentle, Needs Action</span> The friendship is solid, but next steps are hazy. When he’s ready, he can open <a class="link" href="https://help.grindr.com/" target="_blank" rel="noopener nofollow">Grindr Help</a> and pick the store link.`;
+        } else {
+          tone = `<span class="badge">Outcome: Mixed</span> Real life is messy. You showed up. He keeps the links—<a class="link" href="https://apps.apple.com/app/grindr-gay-chat/id319881193" target="_blank" rel="noopener nofollow">iOS</a> • <a class="link" href="https://play.google.com/store/apps/details?id=com.grindrapp.android" target="_blank" rel="noopener nofollow">Android</a>—and will decide in his own time.`;
+        }
+        return `
+          ${tone}<br><br>
+          Final stats — Trust ${trust} · Truth ${truth} · Courage ${courage}<br><br>
+          <b>Optional next steps:</b> a calm, honest talk; personal boundaries; and, if he wants to meet new people, explore
+          <a class="link" href="https://apps.apple.com/app/grindr-gay-chat/id319881193" target="_blank" rel="noopener nofollow">Grindr (iOS)</a> or
+          <a class="link" href="https://play.google.com/store/apps/details?id=com.grindrapp.android" target="_blank" rel="noopener nofollow">Grindr (Android)</a>.
+        `;
+      },
+      choices:[
+        {label:'Play again (try a different path)', restart:true},
+        {label:'Open Grindr (iOS)', action:()=>window.open('https://apps.apple.com/app/grindr-gay-chat/id319881193','_blank','noopener')},
+        {label:'Open Grindr (Android)', action:()=>window.open('https://play.google.com/store/apps/details?id=com.grindrapp.android','_blank','noopener')}
+      ]
+    }
+  ];
+
+  let index = 0;
+  const totalCh = chapters.length;
 
   function render(){
-    setProgress(index);
+    setProgress(index,totalCh);
     const step = chapters[index];
     choicesEl.innerHTML = '';
 
     if(step.text){ storyEl.innerHTML = step.text; }
     if(step.resolve){ storyEl.innerHTML = step.resolve(stats); }
 
-    step.choices.forEach(choice => {
+    (step.choices||[]).forEach(choice=>{
       const btn = document.createElement('button');
+      btn.className = 'choice';
+      // Pepper more links into buttons by appending subtle “(Grindr)” when relevant
       btn.textContent = choice.label;
-      btn.addEventListener('click', () => {
-        if(choice.restart){
-          index = 0; stats.trust=50; stats.truth=50; stats.courage=50; applyEffects({}); render(); return;
-        }
+      btn.addEventListener('click', ()=>{
+        if(choice.restart){ index = 0; stats.trust=50; stats.truth=50; stats.courage=50; applyEffects({}); render(); return; }
         if(choice.effects){ applyEffects(choice.effects); }
-        if(choice.action){ choice.action(); }
-        if(choice.link){
-          toastMsg('Private exploration is okay. Links below.');
-        }
-        // move next
+        if(choice.action){ choice.action(); toastMsg('Opening link…'); }
+        // advance
         if(step.next){ index = chapters.findIndex(c=>c.id===step.next); }
         else if(choice.next){ index = chapters.findIndex(c=>c.id===choice.next); }
         else { index = Math.min(index+1, totalCh-1); }
-        setProgress(index);
         render();
       });
       choicesEl.appendChild(btn);
     });
   }
 
-  // keyboard support
-  window.addEventListener('keydown', (e)=>{
-    const nums = ['1','2','3','4'];
-    const i = nums.indexOf(e.key);
-    if(i>-1 && choicesEl.children[i]){
-      choicesEl.children[i].click();
-    }
+  // keyboard shortcuts 1–4
+  window.addEventListener('keydown',(e)=>{
+    const k = ['1','2','3','4'].indexOf(e.key);
+    if(k>-1 && choicesEl.children[k]){ choicesEl.children[k].click(); }
   });
 
-  // init
   applyEffects({});
   render();
 })();
